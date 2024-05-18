@@ -1,18 +1,23 @@
 {
   "name": "myfifa-mobile",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start -c",
     "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "ios": "expo start --ios"
   },
   "dependencies": {
+    "@tamagui/babel-plugin": "^1.98.1",
+    "@tamagui/config": "^1.98.1",
     "expo": "~51.0.8",
+    "expo-font": "~12.0.5",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
-    "react-native": "0.74.1"
+    "react-dom": "^18.3.1",
+    "react-native": "0.74.1",
+    "react-native-reanimated": "^3.11.0",
+    "tamagui": "^1.98.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
