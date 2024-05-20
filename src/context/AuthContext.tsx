@@ -1,7 +1,7 @@
 import { createContext, useContext, useCallback, useMemo, PropsWithChildren } from "react"
 import { useRecoilState } from "recoil"
 import * as SecureStore from 'expo-secure-store'
-import { authTokenAtom } from "../store"
+import { authTokenAtom } from "store"
 
 const AuthContext = createContext<{
   token: string | null;

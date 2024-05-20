@@ -1,6 +1,5 @@
 import { Redirect, Stack } from 'expo-router';
-import { Text } from 'tamagui';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from 'context/AuthContext';
 
 export default function AppLayout() {
   const { token } = useAuth();

@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar'
 import { Slot } from 'expo-router'
 import { RecoilRoot } from 'recoil'
 import React, { useEffect, useState } from 'react'
-import { AuthProvider, useAuth } from '../context/AuthContext'
+import { AuthProvider, useAuth } from 'context/AuthContext'
 
 const tamaguiConfig = createTamagui(config)
 
