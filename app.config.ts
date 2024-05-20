@@ -1,6 +1,7 @@
 export default {
   "expo": {
     "name": "myfifa-mobile",
+    "scheme": "myfifa-mobile",
     "slug": "myfifa-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,7 +22,9 @@ export default {
       }
     },
     "plugins": [
-      "expo-font"
-    ]
-  }
+      "expo-font",
+      "expo-router",
+      "expo-secure-store",
+    ],
+  },
 }
