@@ -1,4 +1,6 @@
-import { View, Text, Button } from 'tamagui'
+import { View } from 'react-native'
+import { Button, Text } from '@rneui/themed'
+import { Stack } from 'expo-router'
 import { useAuth } from 'context/AuthContext'
 
 export default function Root() {
@@ -10,7 +12,8 @@ export default function Root() {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Welcome Back!</Text>
+      <Stack.Screen options={{ headerShown: false }} />
+      <Text h3>Welcome Back!</Text>
       <Button onPress={() => signOut()}>Sign Out</Button>
     </View>
   )

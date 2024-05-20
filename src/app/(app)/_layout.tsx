@@ -1,4 +1,5 @@
 import { Redirect, Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { useAuth } from 'context/AuthContext';
 
 export default function AppLayout() {
@@ -13,5 +14,10 @@ export default function AppLayout() {
   }
 
   // This layout can be deferred because it's not the root layout.
-  return <Stack />;
+  return (
+    <>
+      <Stack />
+      <StatusBar style="dark" />
+    </>
+  )
 }
