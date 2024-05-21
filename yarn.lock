@@ -1952,7 +1952,7 @@
     "@graphql-typed-document-node/core" "^3.1.0"
     wonka "^4.0.14"
 
-"@urql/core@>=2.3.1":
+"@urql/core@>=2.3.1", "@urql/core@^5.0.0":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@urql/core/-/core-5.0.3.tgz#80e390399f6aa32757c42733deb5f029bf0406ad"
   integrity sha512-NZ3YqRr6IphbpFjGqujJOuVuV8/QegYxfjy1zdmOSWpYYFLpmMBfVtzZ/L8IiqPERVAEAIKjUsryLnVtXJQo4w==
@@ -6851,6 +6851,14 @@ url-join@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/url-join/-/url-join-4.0.0.tgz#4d3340e807d3773bda9991f8305acdcc2a665d2a"
   integrity sha512-EGXjXJZhIHiQMK2pQukuFcL303nskqIRzWvPvV5O8miOfwoUb9G+a/Cld60kUyeaybEI94wvVClT10DtfeAExA==
+
+urql@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/urql/-/urql-4.1.0.tgz#a75efe572d7b2e69103649a8457d3a63fce31ee8"
+  integrity sha512-NfbfTvxy1sM89EQAJWm89qJZihUWk7BSMfrWgfljFXLOf+e7RK7DtV/Tbg2+82HnCG2x3LcEOJenxiFSYEC+bw==
+  dependencies:
+    "@urql/core" "^5.0.0"
+    wonka "^6.3.2"
 
 use-latest-callback@^0.1.9:
   version "0.1.9"

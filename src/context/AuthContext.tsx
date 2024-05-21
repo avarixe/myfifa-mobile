@@ -1,4 +1,4 @@
-import { createContext, useContext, useCallback, useMemo, PropsWithChildren } from "react"
+import { createContext, useContext, useCallback, PropsWithChildren } from "react"
 import { useRecoilState } from "recoil"
 import * as SecureStore from 'expo-secure-store'
 import { authTokenAtom } from "store"
@@ -36,11 +36,11 @@ export function AuthProvider(props: PropsWithChildren) {
     setAuthToken(token)
   }, [setAuthToken])
 
-  const value = useMemo(() => ({
+  const value = {
     token: authToken,
     setToken,
     loadToken,
-  }), [authToken, setAuthToken])
+  }
 
   return (
     <AuthContext.Provider value={value}>

@@ -2,6 +2,7 @@ import { Slot } from 'expo-router'
 import { RecoilRoot } from 'recoil'
 import React, { useEffect, useState, useCallback } from 'react'
 import { AuthProvider, useAuth } from 'context/AuthContext'
+import { UrqlProvider } from 'context/UrqlContext'
 
 const App = () => {
   const [tokenLoaded, setTokenLoaded] = useState(false)
@@ -23,7 +24,9 @@ export default function Layout() {
   return (
     <RecoilRoot>
       <AuthProvider>
-        <App />
+        <UrqlProvider>
+          <App />
+        </UrqlProvider>
       </AuthProvider>
     </RecoilRoot>
   )
