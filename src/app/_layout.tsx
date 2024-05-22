@@ -1,8 +1,7 @@
 import { Slot } from 'expo-router'
 import { RecoilRoot } from 'recoil'
 import React, { useEffect, useState, useCallback } from 'react'
-import { AuthProvider, useAuth } from 'context/AuthContext'
-import { UrqlProvider } from 'context/UrqlContext'
+import { AuthProvider, UrqlProvider, useAuth } from 'context'
 
 const App = () => {
   const [tokenLoaded, setTokenLoaded] = useState(false)

@@ -1,7 +1,5 @@
-import { View } from 'react-native'
-import { Button, Text } from '@rneui/themed'
-import { Stack } from 'expo-router'
-import { useAuth } from 'context/AuthContext'
+import { Button } from '@rneui/themed'
+import { useAuth } from 'context'
 import { gql, useMutation } from 'urql'
 
 const RevokeAccessToken = gql`
@@ -12,7 +10,7 @@ const RevokeAccessToken = gql`
   }
 `
 
-export default function Root() {
+export function LogOut() {
   const { token, setToken } = useAuth()
 
   const [{ fetching }, revokeAccessToken] = useMutation(RevokeAccessToken)
@@ -27,15 +25,11 @@ export default function Root() {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Stack.Screen options={{ headerShown: false }} />
-      <Text h3>Welcome Back!</Text>
-      <Button
-        onPress={() => signOut()}
-        loading={fetching}
-      >
-        Sign Out
-      </Button>
-    </View>
+    <Button
+      onPress={() => signOut()}
+      loading={fetching}
+    >
+      Sign Out
+    </Button>
   )
 }

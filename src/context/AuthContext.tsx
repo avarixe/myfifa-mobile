@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil"
 import * as SecureStore from 'expo-secure-store'
 import { authTokenAtom } from "store"
 
-const AuthContext = createContext<{
+export const AuthContext = createContext<{
   token: string | null;
   setToken: (token?: string) => Promise<void>;
   loadToken: () => Promise<void>;
@@ -13,7 +13,6 @@ const AuthContext = createContext<{
   loadToken: async () => {},
 });
 
-// This hook can be used to access the user info.
 export function useAuth() {
   return useContext(AuthContext);
 }
