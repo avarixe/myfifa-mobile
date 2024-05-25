@@ -1,4 +1,4 @@
-import { Button } from '@rneui/themed'
+import { Button, Icon } from '@rneui/themed'
 import { useAuth } from 'context'
 import { gql, useMutation } from 'urql'
 
@@ -27,9 +27,9 @@ export function LogOut() {
   return (
     <Button
       onPress={() => signOut()}
+      icon={{ name: "logout", type: "material-community" }}
       loading={fetching}
-    >
-      Sign Out
-    </Button>
+      color="transparent"
+    />
   )
 }
