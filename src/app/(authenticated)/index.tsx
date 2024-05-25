@@ -16,7 +16,9 @@ const FetchTeams = gql`
 `
 
 export default function Teams() {
-  const [{ data, fetching }] = useQuery<{ teams: Team[] }>({ query: FetchTeams })
+  const [{ data, fetching }] = useQuery<{ teams: Team[] }>({
+    query: FetchTeams
+  })
 
   return (
     <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -29,17 +31,27 @@ export default function Teams() {
             renderItem={({ item: team }) => {
               console.debug('team badge: ', team.badgePath)
               return (
-              <ListItem bottomDivider>
-                <Avatar
-                    source={team.badgePath ? { uri: getBadgeUrl(team) } : undefined}
-                    icon={team.badgePath ? undefined : { name: 'shield-half-full', type: 'material-community' }}
-                />
-                <ListItem.Content>
-                  <ListItem.Title>{team.name}</ListItem.Title>
-                  <ListItem.Subtitle>{team.currentlyOn}</ListItem.Subtitle>
-                </ListItem.Content>
-              </ListItem>
-            )}}
+                <ListItem bottomDivider>
+                  <Avatar
+                    source={
+                      team.badgePath ? { uri: getBadgeUrl(team) } : undefined
+                    }
+                    icon={
+                      team.badgePath
+                        ? undefined
+                        : {
+                            name: 'shield-half-full',
+                            type: 'material-community'
+                          }
+                    }
+                  />
+                  <ListItem.Content>
+                    <ListItem.Title>{team.name}</ListItem.Title>
+                    <ListItem.Subtitle>{team.currentlyOn}</ListItem.Subtitle>
+                  </ListItem.Content>
+                </ListItem>
+              )
+            }}
             estimatedItemSize={80}
           />
         </View>

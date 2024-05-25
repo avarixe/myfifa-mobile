@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { View } from "react-native"
+import { View } from 'react-native'
 import { Button, Input } from '@rneui/themed'
 import { router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { useAuth } from "context"
+import { useAuth } from 'context'
 import { userFragment } from 'fragments'
 import { useMutation, gql } from 'urql'
 
@@ -33,7 +33,9 @@ export default function SignIn() {
     if (error) {
       console.error(error)
     } else {
-      const { grantAccessToken: { token, user } } = data
+      const {
+        grantAccessToken: { token, user }
+      } = data
       console.debug('User: ', user)
       await setToken(token)
       router.replace('/')
@@ -41,7 +43,14 @@ export default function SignIn() {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: 'transparent' }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent'
+      }}
+    >
       <Input
         value={username}
         onChangeText={setUsername}
@@ -61,13 +70,10 @@ export default function SignIn() {
         autoCorrect={false}
         autoCapitalize="none"
       />
-      <Button
-        onPress={() => signIn()}
-        loading={fetching}
-      >
+      <Button onPress={() => signIn()} loading={fetching}>
         Sign In
       </Button>
       <StatusBar style="dark" />
     </View>
-  );
+  )
 }

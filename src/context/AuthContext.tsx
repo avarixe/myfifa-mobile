@@ -1,34 +1,42 @@
-import { createContext, useContext, useCallback, PropsWithChildren } from "react"
-import { useRecoilState } from "recoil"
+import {
+  createContext,
+  useContext,
+  useCallback,
+  PropsWithChildren
+} from 'react'
+import { useRecoilState } from 'recoil'
 import * as SecureStore from 'expo-secure-store'
-import { authTokenAtom } from "store"
+import { authTokenAtom } from 'store'
 
 export const AuthContext = createContext<{
-  token: string | null;
-  setToken: (token?: string) => Promise<void>;
-  loadToken: () => Promise<void>;
+  token: string | null
+  setToken: (token?: string) => Promise<void>
+  loadToken: () => Promise<void>
 }>({
   token: null,
   setToken: async () => {},
-  loadToken: async () => {},
-});
+  loadToken: async () => {}
+})
 
 export function useAuth() {
-  return useContext(AuthContext);
+  return useContext(AuthContext)
 }
 
 export function AuthProvider(props: PropsWithChildren) {
-  const [authToken, setAuthToken] = useRecoilState(authTokenAtom);
+  const [authToken, setAuthToken] = useRecoilState(authTokenAtom)
 
-  const setToken = useCallback(async (token?: string) => {
-    if (token) {
-      await SecureStore.setItemAsync('authToken', token)
-      setAuthToken(token)
-    } else {
-      await SecureStore.deleteItemAsync('authToken')
-      setAuthToken(null)
-    }
-  }, [setAuthToken])
+  const setToken = useCallback(
+    async (token?: string) => {
+      if (token) {
+        await SecureStore.setItemAsync('authToken', token)
+        setAuthToken(token)
+      } else {
+        await SecureStore.deleteItemAsync('authToken')
+        setAuthToken(null)
+      }
+    },
+    [setAuthToken]
+  )
 
   const loadToken = useCallback(async () => {
     const token = await SecureStore.getItemAsync('authToken')
@@ -38,12 +46,10 @@ export function AuthProvider(props: PropsWithChildren) {
   const value = {
     token: authToken,
     setToken,
-    loadToken,
+    loadToken
   }
 
   return (
-    <AuthContext.Provider value={value}>
-      {props.children}
-    </AuthContext.Provider>
-  );
+    <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
+  )
 }

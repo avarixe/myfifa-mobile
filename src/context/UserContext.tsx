@@ -1,18 +1,24 @@
-import { createContext, useContext, PropsWithChildren, useState, useEffect } from "react"
+import {
+  createContext,
+  useContext,
+  PropsWithChildren,
+  useState,
+  useEffect
+} from 'react'
 import { Text } from '@rneui/themed'
-import { User } from "types"
-import { gql, useQuery } from "urql";
-import { userFragment } from "fragments";
+import { User } from 'types'
+import { gql, useQuery } from 'urql'
+import { userFragment } from 'fragments'
 
 export const UserContext = createContext<{
-  user: User | null;
+  user: User | null
 }>({
-  user: null,
-});
+  user: null
+})
 
 // This hook can be used to access the user info.
 export function useUser() {
-  return useContext(UserContext);
+  return useContext(UserContext)
 }
 
 const FetchUser = gql`
@@ -25,7 +31,7 @@ const FetchUser = gql`
 `
 
 export function UserProvider(props: PropsWithChildren) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(null)
 
   const [{ data }] = useQuery({ query: FetchUser })
 
@@ -37,9 +43,7 @@ export function UserProvider(props: PropsWithChildren) {
 
   return (
     <UserContext.Provider value={{ user }}>
-      {user ? props.children : (
-        <Text>Loading User...</Text>
-      )}
+      {user ? props.children : <Text>Loading User...</Text>}
     </UserContext.Provider>
-  );
+  )
 }
