@@ -2,7 +2,7 @@ import { Redirect, Stack, useNavigation } from 'expo-router'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StatusBar } from 'expo-status-bar'
 import { useAuth, UserProvider } from 'context'
-import { LogOut } from 'components'
+import { LogOut, TeamSelector } from 'components'
 import { Button } from '@rneui/themed'
 
 export default function AppLayout() {
@@ -25,7 +25,6 @@ export default function AppLayout() {
       <Stack
         screenOptions={{
           title: 'MyFIFA Manager',
-          headerShadowVisible: false,
           headerTitleAlign: 'center',
           headerRight: () => (
             <>
@@ -41,6 +40,7 @@ export default function AppLayout() {
           )
         }}
       />
+      <TeamSelector />
       <StatusBar style="dark" />
     </UserProvider>
   )

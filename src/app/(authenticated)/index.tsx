@@ -1,61 +1,35 @@
 import { View } from 'react-native'
-import { Avatar, ListItem, Text } from '@rneui/themed'
-import { gql, useQuery } from 'urql'
-import { teamFragment } from 'fragments'
-import { Team } from 'types'
-import { FlashList } from '@shopify/flash-list'
-import { getBadgeUrl } from 'utils'
-
-const FetchTeams = gql`
-  query FetchTeams {
-    teams {
-      ...TeamData
-    }
-  }
-  ${teamFragment}
-`
+import { Text } from '@rneui/themed'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { showTeamSelectorAtom, teamIdAtom } from 'store'
+import { TeamProvider } from 'context'
+import { Stack } from 'expo-router'
+import { useEffect } from 'react'
 
 export default function Teams() {
-  const [{ data, fetching }] = useQuery<{ teams: Team[] }>({
-    query: FetchTeams
-  })
+  const teamId = useRecoilValue(teamIdAtom)
+  const [_, setShowTeamSelector] = useRecoilState(showTeamSelectorAtom)
+
+  useEffect(() => {
+    if (!teamId) {
+      setShowTeamSelector(true)
+    }
+  }, [teamId])
+
+  if (!teamId) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>No Team Selected</Text>
+      </View>
+    )
+  }
 
   return (
-    <View style={{ flex: 1, flexDirection: 'column' }}>
-      {fetching ? (
-        <Text>Loading Teams...</Text>
-      ) : (
-        <View style={{ flexGrow: 1 }}>
-          <FlashList
-            data={data?.teams}
-            renderItem={({ item: team }) => {
-              console.debug('team badge: ', team.badgePath)
-              return (
-                <ListItem bottomDivider>
-                  <Avatar
-                    source={
-                      team.badgePath ? { uri: getBadgeUrl(team) } : undefined
-                    }
-                    icon={
-                      team.badgePath
-                        ? undefined
-                        : {
-                            name: 'shield-half-full',
-                            type: 'material-community'
-                          }
-                    }
-                  />
-                  <ListItem.Content>
-                    <ListItem.Title>{team.name}</ListItem.Title>
-                    <ListItem.Subtitle>{team.currentlyOn}</ListItem.Subtitle>
-                  </ListItem.Content>
-                </ListItem>
-              )
-            }}
-            estimatedItemSize={80}
-          />
-        </View>
-      )}
-    </View>
+    <TeamProvider teamId={teamId}>
+      <Stack.Screen
+        name="(authenticated)/(tabs)"
+        options={{ headerShown: false }}
+      />
+    </TeamProvider>
   )
 }
