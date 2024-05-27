@@ -9,8 +9,3 @@ export const teamIdAtom = atom<string | null>({
   key: 'teamId',
   default: null
 })
-
-export const showTeamSelectorAtom = atom<boolean>({
-  key: 'showTeamSelector',
-  default: false
-})

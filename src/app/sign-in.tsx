@@ -36,7 +36,6 @@ export default function SignIn() {
       const {
         grantAccessToken: { token, user }
       } = data
-      console.debug('User: ', user)
       await setToken(token)
       router.replace('/')
     }

@@ -1,15 +1,14 @@
-import { Redirect, Stack, useNavigation } from 'expo-router'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { Redirect, router, Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useAuth, UserProvider } from 'context'
-import { LogOut, TeamSelector } from 'components'
+import { LogOut } from 'components'
 import { Button } from '@rneui/themed'
+import { Platform } from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { Drawer } from 'expo-router/drawer'
 
 export default function AppLayout() {
   const { token } = useAuth()
-
-  const navigation =
-    useNavigation<NativeStackNavigationProp<{ user: undefined }>>()
 
   // Only require authentication within the (authenticated) group's layout as users
   // need to be able to access the (authenticated) group and sign in again.
@@ -22,25 +21,43 @@ export default function AppLayout() {
   // This layout can be deferred because it's not the root layout.
   return (
     <UserProvider>
-      <Stack
-        screenOptions={{
-          title: 'MyFIFA Manager',
-          headerTitleAlign: 'center',
-          headerRight: () => (
-            <>
-              <Button
-                onPress={() => {
-                  navigation.navigate('user')
-                }}
-                icon={{ name: 'account', type: 'material-community' }}
-                color="transparent"
-              />
-              <LogOut />
-            </>
-          )
-        }}
-      />
-      <TeamSelector />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Drawer
+          screenOptions={{
+            title: 'MyFIFA Manager',
+            headerTitleAlign: 'center',
+            headerRight: () => <LogOut />
+          }}
+        >
+          <Drawer.Screen
+            name="index"
+            options={{
+              drawerItemStyle: { display: 'none' }
+            }}
+          />
+          <Drawer.Screen
+            name="team"
+            options={{
+              drawerLabel: 'Team',
+              title: 'Team'
+            }}
+          />
+          <Drawer.Screen
+            name="select-team"
+            options={{
+              drawerLabel: 'Select a Team',
+              title: 'Select a Team'
+            }}
+          />
+          <Drawer.Screen
+            name="user"
+            options={{
+              drawerLabel: 'User',
+              title: 'User'
+            }}
+          />
+        </Drawer>
+      </GestureHandlerRootView>
       <StatusBar style="dark" />
     </UserProvider>
   )
