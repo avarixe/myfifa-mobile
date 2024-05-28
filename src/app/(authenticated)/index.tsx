@@ -9,8 +9,6 @@ export default function EntryScreen() {
   const teamId = useRecoilValue(teamIdAtom)
 
   useEffect(() => {
-    console.debug('teamId: ', teamId)
-
     if (teamId) {
       // TOOD: Load Team
 

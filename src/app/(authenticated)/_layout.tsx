@@ -38,8 +38,7 @@ export default function AppLayout() {
           <Drawer.Screen
             name="team"
             options={{
-              drawerLabel: 'Team',
-              title: 'Team'
+              drawerLabel: 'Team'
             }}
           />
           <Drawer.Screen

@@ -25,7 +25,7 @@ const FetchTeams = gql`
   ${teamFragment}
 `
 
-export default function TeamSelector() {
+export default function SelectTeamScreen() {
   const [teamId, setTeamId] = useRecoilState(teamIdAtom)
 
   const [{ data, fetching }] = useQuery<{ teams: Team[] }>({

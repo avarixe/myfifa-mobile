@@ -20,7 +20,7 @@ const GrantAccessToken = gql`
   ${userFragment}
 `
 
-export default function SignIn() {
+export default function SignInScreen() {
   const { setToken } = useAuth()
 
   const [{ fetching }, grantAccessToken] = useMutation(GrantAccessToken)

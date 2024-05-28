@@ -2,7 +2,7 @@ import { View } from 'react-native'
 import { Text } from '@rneui/themed'
 import { useUser } from 'context'
 
-export default function Teams() {
+export default function UserScreen() {
   const { user } = useUser()
 
   return (

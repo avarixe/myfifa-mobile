@@ -19,3 +19,9 @@ export interface Team extends Model {
   currency: string
   badgePath?: string
 }
+
+export interface Player extends Model {
+  name: string
+  pos: string // TODO: enum
+  nationality: string
+}
