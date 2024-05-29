@@ -14,7 +14,8 @@ import { FlashList } from '@shopify/flash-list'
 import { getBadgeUrl } from 'utils'
 import { useRecoilState } from 'recoil'
 import { teamIdAtom } from 'store'
-import { router } from 'expo-router'
+import { router, Stack } from 'expo-router'
+import Drawer from 'expo-router/drawer'
 
 const FetchTeams = gql`
   query FetchTeams {
@@ -26,7 +27,7 @@ const FetchTeams = gql`
 `
 
 export default function SelectTeamScreen() {
-  const [teamId, setTeamId] = useRecoilState(teamIdAtom)
+  const [_, setTeamId] = useRecoilState(teamIdAtom)
 
   const [{ data, fetching }] = useQuery<{ teams: Team[] }>({
     query: FetchTeams

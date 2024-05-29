@@ -3,12 +3,12 @@ import { Text } from '@rneui/themed'
 import { useRecoilValue } from 'recoil'
 import { teamIdAtom } from 'store'
 import { useEffect } from 'react'
-import { Link, router } from 'expo-router'
+import { Link, router, useFocusEffect } from 'expo-router'
 
 export default function EntryScreen() {
   const teamId = useRecoilValue(teamIdAtom)
 
-  useEffect(() => {
+  useFocusEffect(() => {
     if (teamId) {
       // TOOD: Load Team
 
@@ -16,7 +16,7 @@ export default function EntryScreen() {
     } else {
       router.navigate('/select-team')
     }
-  }, [teamId])
+  })
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

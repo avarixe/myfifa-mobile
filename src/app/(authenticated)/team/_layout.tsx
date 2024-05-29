@@ -1,6 +1,6 @@
-import { Avatar, Icon } from '@rneui/themed'
+import { Avatar, Button, Icon } from '@rneui/themed'
 import { TeamProvider, useTeam } from 'context'
-import { Tabs } from 'expo-router'
+import { router, Tabs } from 'expo-router'
 import { useRecoilValue } from 'recoil'
 import { teamIdAtom } from 'store'
 import { getBadgeUrl } from 'utils'
@@ -9,7 +9,19 @@ const TeamTabs = () => {
   const { team } = useTeam()
 
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
+    <Tabs
+      screenOptions={{
+        title: 'MyFIFA Manager',
+        headerTitleAlign: 'center',
+        headerRight: () => (
+          <Button
+            onPress={() => router.navigate('/settings')}
+            icon={{ name: 'cog', type: 'material-community' }}
+            color="transparent"
+          />
+        )
+      }}
+    >
       <Tabs.Screen
         name="players"
         options={{

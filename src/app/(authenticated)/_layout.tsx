@@ -21,42 +21,63 @@ export default function AppLayout() {
   // This layout can be deferred because it's not the root layout.
   return (
     <UserProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Drawer
-          screenOptions={{
-            title: 'MyFIFA Manager',
-            headerTitleAlign: 'center',
-            headerRight: () => <LogOut />
+      <Drawer
+        screenOptions={{
+          title: 'MyFIFA Manager',
+          headerTitleAlign: 'center',
+          headerRight: () => (
+            <Button
+              onPress={() => router.navigate('/settings')}
+              icon={{ name: 'cog', type: 'material-community' }}
+              color="transparent"
+            />
+          )
+        }}
+      >
+        <Drawer.Screen
+          name="index"
+          options={{
+            drawerLabel: 'MyFIFA Manager',
+            headerLeft: () => <></>
           }}
-        >
-          <Drawer.Screen
-            name="index"
-            options={{
-              drawerItemStyle: { display: 'none' }
-            }}
-          />
-          <Drawer.Screen
-            name="team"
-            options={{
-              drawerLabel: 'Team'
-            }}
-          />
-          <Drawer.Screen
-            name="select-team"
-            options={{
-              drawerLabel: 'Select a Team',
-              title: 'Select a Team'
-            }}
-          />
-          <Drawer.Screen
-            name="user"
-            options={{
-              drawerLabel: 'User',
-              title: 'User'
-            }}
-          />
-        </Drawer>
-      </GestureHandlerRootView>
+        />
+        <Drawer.Screen
+          name="team"
+          options={{
+            headerShown: false,
+            drawerItemStyle: { display: 'none' }
+          }}
+        />
+        <Drawer.Screen
+          name="select-team"
+          options={{
+            drawerLabel: 'Select a Team',
+            title: 'Select a Team',
+            headerLeft: () => <></>,
+            headerRight: () => <></>
+          }}
+        />
+        <Drawer.Screen
+          name="settings"
+          options={{
+            drawerLabel: 'Settings',
+            headerLeft: () => {
+              if (router.canGoBack()) {
+                return (
+                  <Button
+                    onPress={router.back}
+                    icon={{ name: 'arrow-left', type: 'material-community' }}
+                    color="transparent"
+                  />
+                )
+              } else {
+                return null
+              }
+            },
+            headerRight: () => <></>
+          }}
+        />
+      </Drawer>
       <StatusBar style="dark" />
     </UserProvider>
   )

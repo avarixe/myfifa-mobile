@@ -25,11 +25,8 @@ export function LogOut() {
   }
 
   return (
-    <Button
-      onPress={() => signOut()}
-      icon={{ name: 'logout', type: 'material-community' }}
-      loading={fetching}
-      color="transparent"
-    />
+    <Button onPress={signOut} loading={fetching} color="error">
+      Sign Out
+    </Button>
   )
 }
