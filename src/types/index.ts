@@ -3,15 +3,22 @@ interface Model {
   createdAt: string
 }
 
+interface NamedModel extends Model {
+  name: string
+}
+
+interface TeamModel extends Model {
+  teamId: string
+}
+
 export interface User extends Model {
   fullName: string
   username: string
   email: string
 }
 
-export interface Team extends Model {
+export interface Team extends NamedModel {
   previousId?: string
-  name: string
   managerName: string
   game: string
   startedOn: string
@@ -20,8 +27,17 @@ export interface Team extends Model {
   badgePath?: string
 }
 
-export interface Player extends Model {
-  name: string
+export interface Player extends TeamModel, NamedModel {
   pos: string // TODO: enum
   nationality: string
+}
+
+export interface Match extends TeamModel {
+  home: string
+  homeScore: number
+  away: string
+  awayScore: number
+  playedOn: string
+  competition: string
+  stage: string | null
 }
