@@ -83,9 +83,7 @@ export default function MatchesScreen() {
                 <ListItem.Title>
                   {match.home} v {match.away}
                 </ListItem.Title>
-                <ListItem.Subtitle>
-                  {match.homeScore} - {match.awayScore}
-                </ListItem.Subtitle>
+                <ListItem.Subtitle>{match.score}</ListItem.Subtitle>
                 <ListItem.Subtitle>{match.playedOn}</ListItem.Subtitle>
               </ListItem.Content>
             </ListItem>

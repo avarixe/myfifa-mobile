@@ -1,5 +1,6 @@
-import { ListItem, Text } from '@rneui/themed'
+import { Avatar, ListItem, Text } from '@rneui/themed'
 import { FlashList } from '@shopify/flash-list'
+import { PlayerStatus } from 'components'
 import { useTeam } from 'context'
 import { playerFragment } from 'fragments'
 import { View } from 'react-native'
@@ -35,9 +36,14 @@ export default function PlayersScreen() {
           renderItem={({ item: player }) => {
             return (
               <ListItem bottomDivider>
+                <Avatar>
+                  <PlayerStatus player={player} />
+                </Avatar>
+                <Avatar>
+                  <Text>{player.pos}</Text>
+                </Avatar>
                 <ListItem.Content>
                   <ListItem.Title>{player.name}</ListItem.Title>
-                  <ListItem.Subtitle>{player.pos}</ListItem.Subtitle>
                 </ListItem.Content>
               </ListItem>
             )

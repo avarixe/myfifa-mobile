@@ -30,10 +30,14 @@ export interface Team extends NamedModel {
 export interface Player extends TeamModel, NamedModel {
   pos: string // TODO: enum
   nationality: string
+  ovr: number
+  value: number
+  status: string | null
 }
 
 export interface Match extends TeamModel {
   home: string
+  score: string
   homeScore: number
   away: string
   awayScore: number
