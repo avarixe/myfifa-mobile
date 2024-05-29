@@ -1,10 +1,7 @@
-import { Redirect, router, Stack } from 'expo-router'
+import { Redirect, router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useAuth, UserProvider } from 'context'
-import { LogOut } from 'components'
 import { Button } from '@rneui/themed'
-import { Platform } from 'react-native'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Drawer } from 'expo-router/drawer'
 
 export default function AppLayout() {

@@ -34,7 +34,7 @@ export default function SignInScreen() {
       console.error(error)
     } else {
       const {
-        grantAccessToken: { token, user }
+        grantAccessToken: { token }
       } = data
       await setToken(token)
       router.replace('/')
@@ -69,7 +69,7 @@ export default function SignInScreen() {
         autoCorrect={false}
         autoCapitalize="none"
       />
-      <Button onPress={() => signIn()} loading={fetching}>
+      <Button onPress={signIn} loading={fetching}>
         Sign In
       </Button>
       <StatusBar style="dark" />

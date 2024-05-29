@@ -1,12 +1,5 @@
 import { View } from 'react-native'
-import {
-  Avatar,
-  BottomSheet,
-  Button,
-  Icon,
-  ListItem,
-  Text
-} from '@rneui/themed'
+import { Avatar, ListItem, Text } from '@rneui/themed'
 import { gql, useQuery } from 'urql'
 import { teamFragment } from 'fragments'
 import { Team } from 'types'
@@ -14,8 +7,7 @@ import { FlashList } from '@shopify/flash-list'
 import { getBadgeUrl } from 'utils'
 import { useRecoilState } from 'recoil'
 import { teamIdAtom } from 'store'
-import { router, Stack } from 'expo-router'
-import Drawer from 'expo-router/drawer'
+import { router } from 'expo-router'
 
 const FetchTeams = gql`
   query FetchTeams {

@@ -1,5 +1,5 @@
 import { Text } from '@rneui/themed'
 
-export default () => {
+export default function MatchesScreen() {
   return <Text>Matches</Text>
 }

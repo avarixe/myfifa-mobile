@@ -2,7 +2,6 @@ import { View } from 'react-native'
 import { Text } from '@rneui/themed'
 import { useRecoilValue } from 'recoil'
 import { teamIdAtom } from 'store'
-import { useEffect } from 'react'
 import { Link, router, useFocusEffect } from 'expo-router'
 
 export default function EntryScreen() {

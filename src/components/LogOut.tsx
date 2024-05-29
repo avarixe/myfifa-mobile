@@ -1,4 +1,4 @@
-import { Button, Icon } from '@rneui/themed'
+import { Button } from '@rneui/themed'
 import { useAuth } from 'context'
 import { gql, useMutation } from 'urql'
 
