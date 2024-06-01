@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { Button, Input } from '@rneui/themed'
 import { router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { useAuth } from 'context'
+import { useAuth } from 'hooks'
 import { userFragment } from 'fragments'
 import { useMutation, gql } from 'urql'
 

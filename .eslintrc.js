@@ -1,7 +1,11 @@
 // https://docs.expo.dev/guides/using-eslint/
 module.exports = {
   extends: ['expo', 'prettier'],
-  plugins: ['prettier', 'unused-imports'],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2018
+  },
+  plugins: ['prettier', 'unused-imports', 'no-type-assertion'],
   rules: {
     '@typescript-eslint/no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error',
@@ -13,6 +17,7 @@ module.exports = {
         args: 'after-used',
         argsIgnorePattern: '^_'
       }
-    ]
+    ],
+    'no-type-assertion/no-type-assertion': 'error'
   }
 }

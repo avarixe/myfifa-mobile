@@ -1,8 +1,9 @@
 import { Avatar, Button, Icon } from '@rneui/themed'
+import { assertType } from 'utils'
 import { TeamProvider, useTeam } from 'context'
 import { router, Tabs } from 'expo-router'
 import { useRecoilValue } from 'recoil'
-import { teamIdAtom } from 'store'
+import { teamIdAtom } from 'atoms'
 import { getBadgeUrl } from 'utils'
 
 const TeamTabs = () => {
@@ -83,7 +84,8 @@ const TeamTabs = () => {
 }
 
 export default function TeamLayout() {
-  const teamId = useRecoilValue(teamIdAtom) as string
+  const teamId = useRecoilValue(teamIdAtom)
+  assertType<string>(teamId)
 
   return (
     <TeamProvider teamId={teamId}>

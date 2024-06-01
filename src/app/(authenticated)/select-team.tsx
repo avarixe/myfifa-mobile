@@ -6,7 +6,7 @@ import { Team } from 'types'
 import { FlashList } from '@shopify/flash-list'
 import { getBadgeUrl } from 'utils'
 import { useRecoilState } from 'recoil'
-import { teamIdAtom } from 'store'
+import { teamIdAtom } from 'atoms'
 import { router } from 'expo-router'
 
 const FetchTeams = gql`

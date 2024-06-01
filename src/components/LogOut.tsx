@@ -1,5 +1,5 @@
 import { Button } from '@rneui/themed'
-import { useAuth } from 'context'
+import { useAuth } from 'hooks'
 import { gql, useMutation } from 'urql'
 
 const RevokeAccessToken = gql`

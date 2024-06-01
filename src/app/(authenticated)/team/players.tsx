@@ -39,9 +39,7 @@ export default function PlayersScreen() {
                 <Avatar>
                   <PlayerStatus player={player} />
                 </Avatar>
-                <Avatar>
-                  <Text>{player.pos}</Text>
-                </Avatar>
+                <Text style={{ fontWeight: 800 }}>{player.pos}</Text>
                 <ListItem.Content>
                   <ListItem.Title>{player.name}</ListItem.Title>
                 </ListItem.Content>

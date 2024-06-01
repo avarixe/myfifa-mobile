@@ -1,8 +1,9 @@
 import { Redirect, router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { useAuth, UserProvider } from 'context'
+import { UserProvider } from 'context'
 import { Button } from '@rneui/themed'
 import { Drawer } from 'expo-router/drawer'
+import { useAuth } from 'hooks'
 
 export default function AppLayout() {
   const { token } = useAuth()

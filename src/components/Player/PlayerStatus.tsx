@@ -2,21 +2,17 @@ import { Icon } from '@rneui/themed'
 import { useMemo } from 'react'
 import { Player } from 'types'
 
-interface PlayerStatusProps {
-  player: Player
-}
-
-export function PlayerStatus({ player }: PlayerStatusProps) {
+export const PlayerStatus: React.FC<{ player: Player }> = ({ player }) => {
   const color = useMemo(() => {
     switch (player.status) {
       case 'Active':
         return 'lightgreen'
       case 'Loaned':
-        return 'deeporange'
-      case 'Injured':
-        return 'magenta'
-      case 'Pending':
         return 'orange'
+      case 'Injured':
+        return 'red'
+      case 'Pending':
+        return 'blue'
       default:
         return undefined
     }

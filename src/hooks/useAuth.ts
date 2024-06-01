@@ -1,28 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useCallback,
-  PropsWithChildren
-} from 'react'
+import { authTokenAtom } from 'atoms'
 import { useRecoilState } from 'recoil'
 import * as SecureStore from 'expo-secure-store'
-import { authTokenAtom } from 'store'
+import { useCallback } from 'react'
 
-export const AuthContext = createContext<{
-  token: string | null
-  setToken: (token?: string) => Promise<void>
-  loadToken: () => Promise<void>
-}>({
-  token: null,
-  setToken: async () => {},
-  loadToken: async () => {}
-})
-
-export function useAuth() {
-  return useContext(AuthContext)
-}
-
-export function AuthProvider(props: PropsWithChildren) {
+export const useAuth = () => {
   const [authToken, setAuthToken] = useRecoilState(authTokenAtom)
 
   const setToken = useCallback(
@@ -43,13 +24,9 @@ export function AuthProvider(props: PropsWithChildren) {
     setAuthToken(token)
   }, [setAuthToken])
 
-  const value = {
+  return {
     token: authToken,
     setToken,
     loadToken
   }
-
-  return (
-    <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
-  )
 }
