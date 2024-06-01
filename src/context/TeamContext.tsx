@@ -1,14 +1,14 @@
+import { Text } from '@rneui/themed'
+import { teamFragment } from 'fragments'
 import {
   createContext,
-  useContext,
   PropsWithChildren,
-  useState,
-  useEffect
+  useContext,
+  useEffect,
+  useState
 } from 'react'
-import { Text } from '@rneui/themed'
 import { Team } from 'types'
 import { gql, useQuery } from 'urql'
-import { teamFragment } from 'fragments'
 
 interface TeamProviderProps extends PropsWithChildren {
   teamId: string

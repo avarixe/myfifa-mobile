@@ -1,8 +1,9 @@
-import { Redirect, router } from 'expo-router'
-import { StatusBar } from 'expo-status-bar'
-import { UserProvider } from 'context'
 import { Button } from '@rneui/themed'
+import { SettingsButton } from 'components'
+import { UserProvider } from 'context'
+import { Redirect, router } from 'expo-router'
 import { Drawer } from 'expo-router/drawer'
+import { StatusBar } from 'expo-status-bar'
 import { useAuth } from 'hooks'
 
 export default function AppLayout() {
@@ -23,20 +24,14 @@ export default function AppLayout() {
         screenOptions={{
           title: 'MyFIFA Manager',
           headerTitleAlign: 'center',
-          headerRight: () => (
-            <Button
-              onPress={() => router.navigate('/settings')}
-              icon={{ name: 'cog', type: 'material-community' }}
-              color="transparent"
-            />
-          )
+          headerLeft: () => null,
+          headerRight: SettingsButton
         }}
       >
         <Drawer.Screen
           name="index"
           options={{
-            drawerLabel: 'MyFIFA Manager',
-            headerLeft: () => <></>
+            drawerLabel: 'MyFIFA Manager'
           }}
         />
         <Drawer.Screen
@@ -51,8 +46,7 @@ export default function AppLayout() {
           options={{
             drawerLabel: 'Select a Team',
             title: 'Select a Team',
-            headerLeft: () => <></>,
-            headerRight: () => <></>
+            headerRight: () => null
           }}
         />
         <Drawer.Screen
@@ -72,7 +66,7 @@ export default function AppLayout() {
                 return null
               }
             },
-            headerRight: () => <></>
+            headerRight: () => null
           }}
         />
       </Drawer>

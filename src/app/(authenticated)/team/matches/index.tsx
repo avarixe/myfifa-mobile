@@ -1,6 +1,7 @@
 import { ListItem } from '@rneui/themed'
 import { FlashList } from '@shopify/flash-list'
 import { useTeam } from 'context'
+import { router } from 'expo-router'
 import { matchFragment } from 'fragments'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { View } from 'react-native'
@@ -78,7 +79,12 @@ export default function MatchesScreen() {
         refreshing={fetching}
         renderItem={({ item: match }) => {
           return (
-            <ListItem bottomDivider>
+            <ListItem
+              bottomDivider
+              onPress={() => {
+                router.navigate(`/team/matches/${match.id}`)
+              }}
+            >
               <ListItem.Content>
                 <ListItem.Title>
                   {match.home} v {match.away}
@@ -86,6 +92,7 @@ export default function MatchesScreen() {
                 <ListItem.Subtitle>{match.score}</ListItem.Subtitle>
                 <ListItem.Subtitle>{match.playedOn}</ListItem.Subtitle>
               </ListItem.Content>
+              <ListItem.Chevron />
             </ListItem>
           )
         }}

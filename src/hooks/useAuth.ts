@@ -1,7 +1,7 @@
 import { authTokenAtom } from 'atoms'
-import { useRecoilState } from 'recoil'
 import * as SecureStore from 'expo-secure-store'
 import { useCallback } from 'react'
+import { useRecoilState } from 'recoil'
 
 export const useAuth = () => {
   const [authToken, setAuthToken] = useRecoilState(authTokenAtom)

@@ -1,8 +1,8 @@
-import { View } from 'react-native'
 import { ListItem } from '@rneui/themed'
-import { useUser } from 'context'
 import { LogOut } from 'components'
+import { useUser } from 'context'
 import { router } from 'expo-router'
+import { View } from 'react-native'
 
 export default function SettingsScreen() {
   const { user } = useUser()

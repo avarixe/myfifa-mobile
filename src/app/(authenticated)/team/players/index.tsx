@@ -2,6 +2,7 @@ import { Avatar, ListItem, Text } from '@rneui/themed'
 import { FlashList } from '@shopify/flash-list'
 import { PlayerStatus } from 'components'
 import { useTeam } from 'context'
+import { router } from 'expo-router'
 import { playerFragment } from 'fragments'
 import { View } from 'react-native'
 import { Player } from 'types'
@@ -35,7 +36,12 @@ export default function PlayersScreen() {
           data={data?.team?.players}
           renderItem={({ item: player }) => {
             return (
-              <ListItem bottomDivider>
+              <ListItem
+                bottomDivider
+                onPress={() => {
+                  router.navigate(`/team/players/${player.id}`)
+                }}
+              >
                 <Avatar>
                   <PlayerStatus player={player} />
                 </Avatar>
@@ -43,6 +49,7 @@ export default function PlayersScreen() {
                 <ListItem.Content>
                   <ListItem.Title>{player.name}</ListItem.Title>
                 </ListItem.Content>
+                <ListItem.Chevron />
               </ListItem>
             )
           }}

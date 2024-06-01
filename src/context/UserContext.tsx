@@ -1,14 +1,14 @@
+import { Text } from '@rneui/themed'
+import { userFragment } from 'fragments'
 import {
   createContext,
-  useContext,
   PropsWithChildren,
-  useState,
-  useEffect
+  useContext,
+  useEffect,
+  useState
 } from 'react'
-import { Text } from '@rneui/themed'
 import { User } from 'types'
 import { gql, useQuery } from 'urql'
-import { userFragment } from 'fragments'
 
 export const UserContext = createContext<{
   user: User | null

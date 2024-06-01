@@ -5,8 +5,18 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018
   },
-  plugins: ['prettier', 'unused-imports', 'no-type-assertion'],
+  plugins: [
+    'simple-import-sort',
+    'prettier',
+    '@typescript-eslint',
+    'unused-imports',
+    'no-type-assertion'
+  ],
   rules: {
+    'import/order': 'off',
+    'sort-imports': 'off',
+    'react-hooks/exhaustive-deps': 'warn',
+    '@typescript-eslint/no-dupe-class-members': 'error',
     '@typescript-eslint/no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
@@ -18,6 +28,9 @@ module.exports = {
         argsIgnorePattern: '^_'
       }
     ],
+    'simple-import-sort/exports': 'error',
+    'simple-import-sort/imports': 'error',
+    eqeqeq: 'error',
     'no-type-assertion/no-type-assertion': 'error'
   }
 }

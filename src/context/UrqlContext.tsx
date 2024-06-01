@@ -1,6 +1,6 @@
-import { Client, Provider, cacheExchange, fetchExchange } from 'urql'
-import { PropsWithChildren, useMemo } from 'react'
 import { useAuth } from 'hooks'
+import { PropsWithChildren, useMemo } from 'react'
+import { cacheExchange, Client, fetchExchange, Provider } from 'urql'
 
 export const UrqlProvider = (props: PropsWithChildren) => {
   const { token } = useAuth()

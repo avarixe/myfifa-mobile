@@ -1,9 +1,14 @@
-import { Avatar, Button, Icon } from '@rneui/themed'
-import { assertType } from 'utils'
-import { TeamProvider, useTeam } from 'context'
-import { router, Tabs } from 'expo-router'
-import { useRecoilValue } from 'recoil'
+import { Avatar, Icon } from '@rneui/themed'
 import { teamIdAtom } from 'atoms'
+import {
+  SettingsButton,
+  TeamActionsSpeedDial,
+  TeamDatePicker
+} from 'components'
+import { TeamProvider, useTeam } from 'context'
+import { Tabs } from 'expo-router'
+import { useRecoilValue } from 'recoil'
+import { assertType } from 'utils'
 import { getBadgeUrl } from 'utils'
 
 const TeamTabs = () => {
@@ -14,19 +19,14 @@ const TeamTabs = () => {
       screenOptions={{
         title: 'MyFIFA Manager',
         headerTitleAlign: 'center',
-        headerRight: () => (
-          <Button
-            onPress={() => router.navigate('/settings')}
-            icon={{ name: 'cog', type: 'material-community' }}
-            color="transparent"
-          />
-        )
+        headerRight: SettingsButton
       }}
     >
       <Tabs.Screen
         name="players"
         options={{
           title: 'Players',
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <Icon name="run" type="material-community" color={color} />
           )
@@ -65,17 +65,22 @@ const TeamTabs = () => {
         name="matches"
         options={{
           title: 'Matches',
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <Icon name="soccer-field" type="material-community" color={color} />
           )
         }}
       />
       <Tabs.Screen
-        name="new"
+        name="squads"
         options={{
-          title: 'Create',
+          title: 'Squads',
           tabBarIcon: ({ color }) => (
-            <Icon name="plus" type="material-community" color={color} />
+            <Icon
+              name="vector-polygon-variant"
+              type="material-community"
+              color={color}
+            />
           )
         }}
       />
@@ -90,6 +95,8 @@ export default function TeamLayout() {
   return (
     <TeamProvider teamId={teamId}>
       <TeamTabs />
+      <TeamDatePicker />
+      <TeamActionsSpeedDial />
     </TeamProvider>
   )
 }

@@ -1,13 +1,13 @@
-import { View } from 'react-native'
 import { Avatar, ListItem, Text } from '@rneui/themed'
-import { gql, useQuery } from 'urql'
-import { teamFragment } from 'fragments'
-import { Team } from 'types'
 import { FlashList } from '@shopify/flash-list'
-import { getBadgeUrl } from 'utils'
-import { useRecoilState } from 'recoil'
 import { teamIdAtom } from 'atoms'
 import { router } from 'expo-router'
+import { teamFragment } from 'fragments'
+import { View } from 'react-native'
+import { useRecoilState } from 'recoil'
+import { Team } from 'types'
+import { gql, useQuery } from 'urql'
+import { getBadgeUrl, toDateString } from 'utils'
 
 const FetchTeams = gql`
   query FetchTeams {
@@ -59,7 +59,10 @@ export default function SelectTeamScreen() {
                 />
                 <ListItem.Content>
                   <ListItem.Title>{team.name}</ListItem.Title>
-                  <ListItem.Subtitle>{team.currentlyOn}</ListItem.Subtitle>
+                  <ListItem.Subtitle>
+                    {toDateString(team.startedOn, 'yyyy')} -{' '}
+                    {toDateString(team.currentlyOn, 'yyyy')}
+                  </ListItem.Subtitle>
                 </ListItem.Content>
                 <ListItem.Chevron />
               </ListItem>
