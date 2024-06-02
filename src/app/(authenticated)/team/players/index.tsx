@@ -1,12 +1,14 @@
 import { Avatar, ListItem, Text } from '@rneui/themed'
 import { FlashList } from '@shopify/flash-list'
-import { PlayerStatus } from 'components'
+import { TouchableListItem } from 'components'
+import { PlayerStatus } from 'components/Player'
 import { useTeam } from 'context'
 import { router } from 'expo-router'
 import { playerFragment } from 'fragments'
 import { View } from 'react-native'
 import { Player } from 'types'
 import { gql, useQuery } from 'urql'
+import { assertDefined } from 'utils/asserts'
 
 const FetchPlayers = gql`
   query FetchPlayers($teamId: ID!) {
@@ -21,10 +23,11 @@ const FetchPlayers = gql`
 
 export default function PlayersScreen() {
   const { team } = useTeam()
+  assertDefined(team)
 
   const [{ data, fetching }] = useQuery<{ team: { players: Player[] } }>({
     query: FetchPlayers,
-    variables: { teamId: team?.id }
+    variables: { teamId: team.id }
   })
 
   if (fetching) {
@@ -36,7 +39,7 @@ export default function PlayersScreen() {
           data={data?.team?.players}
           renderItem={({ item: player }) => {
             return (
-              <ListItem
+              <TouchableListItem
                 bottomDivider
                 onPress={() => {
                   router.navigate(`/team/players/${player.id}`)
@@ -50,7 +53,7 @@ export default function PlayersScreen() {
                   <ListItem.Title>{player.name}</ListItem.Title>
                 </ListItem.Content>
                 <ListItem.Chevron />
-              </ListItem>
+              </TouchableListItem>
             )
           }}
           estimatedItemSize={80}

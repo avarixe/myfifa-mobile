@@ -10,7 +10,7 @@ import {
 import { ScrollView } from 'react-native'
 import { Match } from 'types'
 import { gql, useQuery } from 'urql'
-import { assertType } from 'utils'
+import { assertType } from 'utils/asserts'
 
 const FetchMatch = gql`
   query fetchMatchPage($matchId: ID!) {
@@ -54,7 +54,7 @@ export default function MatchScreen() {
 
   if (data) {
     return (
-      <ScrollView style={{ height: '100%' }}>
+      <ScrollView>
         <Stack.Screen
           options={{ title: `${data.match.home} v ${data.match.away}` }}
         />

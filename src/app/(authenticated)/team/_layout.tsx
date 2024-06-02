@@ -1,23 +1,22 @@
 import { Avatar, Icon } from '@rneui/themed'
 import { teamIdAtom } from 'atoms'
-import {
-  SettingsButton,
-  TeamActionsSpeedDial,
-  TeamDatePicker
-} from 'components'
+import { SettingsButton } from 'components'
+import { TeamActionsSpeedDial, TeamDatePicker } from 'components/Team'
 import { TeamProvider, useTeam } from 'context'
 import { Tabs } from 'expo-router'
 import { useRecoilValue } from 'recoil'
-import { assertType } from 'utils'
-import { getBadgeUrl } from 'utils'
+import { assertDefined } from 'utils/asserts'
+import { getBadgeUrl, getCurrentSeason } from 'utils/team'
 
 const TeamTabs = () => {
   const { team } = useTeam()
+  assertDefined(team)
 
   return (
     <Tabs
       screenOptions={{
         title: 'MyFIFA Manager',
+        headerShown: false,
         headerTitleAlign: 'center',
         headerRight: SettingsButton
       }}
@@ -26,25 +25,41 @@ const TeamTabs = () => {
         name="players"
         options={{
           title: 'Players',
-          headerShown: false,
           tabBarIcon: ({ color }) => (
             <Icon name="run" type="material-community" color={color} />
           )
         }}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            e.preventDefault()
+            navigation.navigate('players', { screen: 'index' })
+          }
+        })}
       />
       <Tabs.Screen
-        name="season"
+        name="seasons"
         options={{
           title: 'Season',
           tabBarIcon: ({ color }) => (
-            <Icon name="calendar" type="material-community" color={color} />
+            <Icon name="trophy" type="material-community" color={color} />
           )
         }}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            e.preventDefault()
+            const currentSeason = getCurrentSeason(team)
+            navigation.navigate('seasons', {
+              screen: '[season]',
+              params: { season: currentSeason }
+            })
+          }
+        })}
       />
       <Tabs.Screen
         name="index"
         options={{
           title: team?.name ?? 'Team',
+          headerShown: true,
           tabBarIcon: ({ color }) => (
             <Avatar
               source={team?.badgePath ? { uri: getBadgeUrl(team) } : undefined}
@@ -65,16 +80,22 @@ const TeamTabs = () => {
         name="matches"
         options={{
           title: 'Matches',
-          headerShown: false,
           tabBarIcon: ({ color }) => (
             <Icon name="soccer-field" type="material-community" color={color} />
           )
         }}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            e.preventDefault()
+            navigation.navigate('matches', { screen: 'index' })
+          }
+        })}
       />
       <Tabs.Screen
         name="squads"
         options={{
           title: 'Squads',
+          headerShown: true,
           tabBarIcon: ({ color }) => (
             <Icon
               name="vector-polygon-variant"
@@ -90,7 +111,7 @@ const TeamTabs = () => {
 
 export default function TeamLayout() {
   const teamId = useRecoilValue(teamIdAtom)
-  assertType<string>(teamId)
+  assertDefined(teamId)
 
   return (
     <TeamProvider teamId={teamId}>

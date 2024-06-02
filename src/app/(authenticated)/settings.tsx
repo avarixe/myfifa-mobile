@@ -1,5 +1,5 @@
 import { ListItem } from '@rneui/themed'
-import { LogOut } from 'components'
+import { LogOut, TouchableListItem } from 'components'
 import { useUser } from 'context'
 import { router } from 'expo-router'
 import { View } from 'react-native'
@@ -9,7 +9,7 @@ export default function SettingsScreen() {
 
   return (
     <View style={{ padding: 4 }}>
-      <ListItem
+      <TouchableListItem
         bottomDivider
         onPress={() => {
           router.navigate('/select-team')
@@ -19,7 +19,7 @@ export default function SettingsScreen() {
           <ListItem.Title>Change Team</ListItem.Title>
         </ListItem.Content>
         <ListItem.Chevron />
-      </ListItem>
+      </TouchableListItem>
       <ListItem bottomDivider>
         <ListItem.Content>
           <ListItem.Title>{user?.fullName}</ListItem.Title>

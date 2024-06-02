@@ -45,3 +45,5 @@ export interface Match extends TeamModel {
   competition: string
   stage: string | null
 }
+
+export interface Squad extends TeamModel, NamedModel {}

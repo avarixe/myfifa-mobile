@@ -1,6 +1,6 @@
 import { FAB } from '@rneui/themed'
 import { useTeam } from 'context'
-import { toDateString } from 'utils'
+import { toDateString } from 'utils/date'
 
 export function TeamDatePicker() {
   const { team } = useTeam()

@@ -14,7 +14,7 @@ import { matchPositions } from 'globals'
 import { ScrollView } from 'react-native'
 import { Player } from 'types'
 import { gql, useQuery } from 'urql'
-import { assertType } from 'utils'
+import { assertDefined, assertType } from 'utils/asserts'
 
 const FetchPlayer = gql`
   query fetchPlayerPage($teamId: ID!, $playerId: ID!) {
@@ -56,21 +56,20 @@ const FetchPlayer = gql`
 
 export default function PlayerScreen() {
   const { team } = useTeam()
+  assertDefined(team)
 
   const { playerId } = useLocalSearchParams()
   assertType<string>(playerId)
 
   const [{ data }] = useQuery<{ player: Player }>({
     query: FetchPlayer,
-    variables: { teamId: team?.id, playerId }
+    variables: { teamId: team.id, playerId }
   })
 
   if (data) {
     return (
-      <ScrollView style={{ height: '100%' }}>
-        <Stack.Screen
-          options={{ title: data.player.name, headerLeft: () => null }}
-        />
+      <ScrollView>
+        <Stack.Screen options={{ title: data.player.name }} />
         <Text>{JSON.stringify(data)}</Text>
       </ScrollView>
     )

@@ -1,3 +1,3 @@
-export * from './App'
-export * from './Player'
-export * from './Team'
+export * from './LogOut'
+export * from './SettingsButton'
+export * from './TouchableListItem'

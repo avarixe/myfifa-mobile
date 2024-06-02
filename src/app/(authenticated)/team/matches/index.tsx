@@ -1,5 +1,6 @@
 import { ListItem } from '@rneui/themed'
 import { FlashList } from '@shopify/flash-list'
+import { TouchableListItem } from 'components'
 import { useTeam } from 'context'
 import { router } from 'expo-router'
 import { matchFragment } from 'fragments'
@@ -7,6 +8,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { View } from 'react-native'
 import { Match } from 'types'
 import { gql, useQuery } from 'urql'
+import { assertDefined } from 'utils/asserts'
 
 const FetchMatches = gql`
   query FetchMatches(
@@ -28,6 +30,7 @@ const FetchMatches = gql`
 
 export default function MatchesScreen() {
   const { team } = useTeam()
+  assertDefined(team)
 
   const [pagination, setPagination] = useState({
     page: 0,
@@ -49,7 +52,7 @@ export default function MatchesScreen() {
   }>({
     query: FetchMatches,
     variables: {
-      teamId: team?.id,
+      teamId: team.id,
       pagination,
       filters: filters.current
     }
@@ -79,7 +82,7 @@ export default function MatchesScreen() {
         refreshing={fetching}
         renderItem={({ item: match }) => {
           return (
-            <ListItem
+            <TouchableListItem
               bottomDivider
               onPress={() => {
                 router.navigate(`/team/matches/${match.id}`)
@@ -93,7 +96,7 @@ export default function MatchesScreen() {
                 <ListItem.Subtitle>{match.playedOn}</ListItem.Subtitle>
               </ListItem.Content>
               <ListItem.Chevron />
-            </ListItem>
+            </TouchableListItem>
           )
         }}
         estimatedItemSize={100}
