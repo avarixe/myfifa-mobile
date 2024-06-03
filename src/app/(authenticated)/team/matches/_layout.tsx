@@ -7,7 +7,9 @@ export default function MatchesLayout() {
       screenOptions={{
         title: 'Matches',
         headerTitleAlign: 'center',
-        headerRight: SettingsButton
+        headerRight: SettingsButton,
+        headerStyle: { backgroundColor: '#000' },
+        headerTintColor: '#fff'
       }}
     />
   )

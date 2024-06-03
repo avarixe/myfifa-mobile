@@ -1,11 +1,9 @@
-import { Avatar, ListItem, Text } from '@rneui/themed'
 import { FlashList } from '@shopify/flash-list'
-import { TouchableListItem } from 'components'
 import { PlayerStatus } from 'components/Player'
 import { useTeam } from 'context'
 import { router } from 'expo-router'
 import { playerFragment } from 'fragments'
-import { View } from 'react-native'
+import { List, Surface, Text } from 'react-native-paper'
 import { Player } from 'types'
 import { gql, useQuery } from 'urql'
 import { assertDefined } from 'utils/asserts'
@@ -25,40 +23,38 @@ export default function PlayersScreen() {
   const { team } = useTeam()
   assertDefined(team)
 
-  const [{ data, fetching }] = useQuery<{ team: { players: Player[] } }>({
+  const [{ data }] = useQuery<{ team: { players: Player[] } }>({
     query: FetchPlayers,
     variables: { teamId: team.id }
   })
 
-  if (fetching) {
-    return <Text>Loading Players...</Text>
-  } else {
+  if (data) {
     return (
-      <View style={{ height: '100%' }}>
+      <Surface style={{ flex: 1 }}>
         <FlashList
-          data={data?.team?.players}
+          data={data.team.players}
           renderItem={({ item: player }) => {
             return (
-              <TouchableListItem
-                bottomDivider
+              <List.Item
+                title={player.name}
+                description={player.pos}
                 onPress={() => {
                   router.navigate(`/team/players/${player.id}`)
                 }}
-              >
-                <Avatar>
-                  <PlayerStatus player={player} />
-                </Avatar>
-                <Text style={{ fontWeight: 800 }}>{player.pos}</Text>
-                <ListItem.Content>
-                  <ListItem.Title>{player.name}</ListItem.Title>
-                </ListItem.Content>
-                <ListItem.Chevron />
-              </TouchableListItem>
+                left={() => <PlayerStatus player={player} />}
+                right={() => <List.Icon icon="chevron-right" />}
+              />
             )
           }}
           estimatedItemSize={80}
         />
-      </View>
+      </Surface>
+    )
+  } else {
+    return (
+      <Surface style={{ flex: 1 }}>
+        <Text>Loading Players...</Text>
+      </Surface>
     )
   }
 }

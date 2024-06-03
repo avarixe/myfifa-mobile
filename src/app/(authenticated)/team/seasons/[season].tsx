@@ -1,7 +1,7 @@
-import { Button } from '@rneui/themed'
 import { useTeam } from 'context'
 import { router, Stack, useLocalSearchParams } from 'expo-router'
 import { ScrollView } from 'react-native'
+import { IconButton, Surface } from 'react-native-paper'
 import { assertDefined } from 'utils/asserts'
 import { toSeasonLabel } from 'utils/team'
 
@@ -13,21 +13,21 @@ export default function SeasonScreen() {
   const season = Number(params.season)
 
   return (
-    <ScrollView>
+    <Surface style={{ flex: 1 }}>
       <Stack.Screen
         options={{
           title: `${toSeasonLabel(team, season)} Season`,
           headerLeft: () => (
-            <Button
-              icon={{ name: 'history', type: 'material-community' }}
+            <IconButton
+              icon="history"
               onPress={() => {
                 router.navigate('/team/seasons')
               }}
-              color="transparent"
             />
           )
         }}
       />
-    </ScrollView>
+      <ScrollView></ScrollView>
+    </Surface>
   )
 }

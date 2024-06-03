@@ -7,7 +7,9 @@ export default function PlayersLayout() {
       screenOptions={{
         title: 'Players',
         headerTitleAlign: 'center',
-        headerRight: SettingsButton
+        headerRight: SettingsButton,
+        headerStyle: { backgroundColor: '#000' },
+        headerTintColor: '#fff'
       }}
     />
   )

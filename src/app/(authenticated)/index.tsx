@@ -1,7 +1,6 @@
-import { Text } from '@rneui/themed'
 import { teamIdAtom } from 'atoms'
 import { Link, router, useFocusEffect } from 'expo-router'
-import { View } from 'react-native'
+import { Surface, Text } from 'react-native-paper'
 import { useRecoilValue } from 'recoil'
 
 export default function EntryScreen() {
@@ -18,9 +17,11 @@ export default function EntryScreen() {
   })
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Surface
+      style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+    >
       <Text>Loading Team...</Text>
       <Link href="/select-team">Select a Team</Link>
-    </View>
+    </Surface>
   )
 }

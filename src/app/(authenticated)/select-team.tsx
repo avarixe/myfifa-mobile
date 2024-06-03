@@ -1,10 +1,8 @@
-import { Avatar, ListItem, Text } from '@rneui/themed'
 import { FlashList } from '@shopify/flash-list'
 import { teamIdAtom } from 'atoms'
-import { TouchableListItem } from 'components'
 import { router } from 'expo-router'
 import { teamFragment } from 'fragments'
-import { View } from 'react-native'
+import { Avatar, List, Surface, Text } from 'react-native-paper'
 import { useRecoilState } from 'recoil'
 import { Team } from 'types'
 import { gql, useQuery } from 'urql'
@@ -37,42 +35,38 @@ export default function SelectTeamScreen() {
   }
 
   return (
-    <View style={{ height: '100%' }}>
+    <Surface style={{ flex: 1 }}>
       {fetching ? (
-        <Text>Loading Teams...</Text>
+        <Surface style={{ flex: 1 }}>
+          <Text>Loading Teams...</Text>
+        </Surface>
       ) : (
         <FlashList
           data={data?.teams}
           renderItem={({ item: team }) => {
             return (
-              <TouchableListItem onPress={() => onSelect(team)} bottomDivider>
-                <Avatar
-                  source={
-                    team.badgePath ? { uri: getBadgeUrl(team) } : undefined
-                  }
-                  icon={
-                    team.badgePath
-                      ? undefined
-                      : {
-                          name: 'shield-half-full',
-                          type: 'material-community'
-                        }
-                  }
-                />
-                <ListItem.Content>
-                  <ListItem.Title>{team.name}</ListItem.Title>
-                  <ListItem.Subtitle>
-                    {toDateString(team.startedOn, 'yyyy')} -{' '}
-                    {toDateString(team.currentlyOn, 'yyyy')}
-                  </ListItem.Subtitle>
-                </ListItem.Content>
-                <ListItem.Chevron />
-              </TouchableListItem>
+              <List.Item
+                onPress={() => onSelect(team)}
+                title={team.name}
+                description={`${toDateString(team.startedOn, 'yyyy')} - ${toDateString(team.currentlyOn, 'yyyy')}`}
+                left={() =>
+                  team.badgePath ? (
+                    <Avatar.Image
+                      source={{ uri: getBadgeUrl(team) }}
+                      size={48}
+                      style={{ backgroundColor: 'transparent' }}
+                    />
+                  ) : (
+                    <Avatar.Icon icon="shield-half-full" />
+                  )
+                }
+                right={() => <List.Icon icon="chevron-right" />}
+              />
             )
           }}
           estimatedItemSize={80}
         />
       )}
-    </View>
+    </Surface>
   )
 }

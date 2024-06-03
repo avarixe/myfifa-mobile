@@ -1,10 +1,9 @@
-import { Button, Input } from '@rneui/themed'
 import { router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { userFragment } from 'fragments'
 import { useAuth } from 'hooks'
 import React, { useState } from 'react'
-import { View } from 'react-native'
+import { Button, Surface, TextInput } from 'react-native-paper'
 import { gql, useMutation } from 'urql'
 
 const GrantAccessToken = gql`
@@ -42,37 +41,37 @@ export default function SignInScreen() {
   }
 
   return (
-    <View
+    <Surface
       style={{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'transparent'
+        padding: 8,
+        justifyContent: 'center'
       }}
     >
-      <Input
+      <TextInput
+        label="Username"
         value={username}
         onChangeText={setUsername}
-        placeholder="Username"
         autoComplete="username"
         autoFocus
         autoCorrect={false}
         autoCapitalize="none"
       />
-      <Input
+      <TextInput
+        label="Password"
         value={password}
         onChangeText={setPassword}
-        placeholder="Password"
         secureTextEntry
         autoComplete="current-password"
         // keyboardType="visible-password"
         autoCorrect={false}
         autoCapitalize="none"
+        style={{ marginTop: 8, marginBottom: 8 }}
       />
-      <Button onPress={signIn} loading={fetching}>
+      <Button onPress={signIn} mode="contained" loading={fetching}>
         Sign In
       </Button>
       <StatusBar style="dark" />
-    </View>
+    </Surface>
   )
 }

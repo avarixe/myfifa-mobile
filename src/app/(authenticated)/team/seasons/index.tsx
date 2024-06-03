@@ -1,14 +1,16 @@
 import { Stack } from 'expo-router'
 import { ScrollView } from 'react-native'
+import { Surface } from 'react-native-paper'
 
 export default function SeasonsScreen() {
   return (
-    <ScrollView>
+    <Surface style={{ flex: 1 }}>
       <Stack.Screen
         options={{
           headerLeft: () => <></>
         }}
       />
-    </ScrollView>
+      <ScrollView></ScrollView>
+    </Surface>
   )
 }

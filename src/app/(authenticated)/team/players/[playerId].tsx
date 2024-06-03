@@ -1,4 +1,3 @@
-import { Text } from '@rneui/themed'
 import { useTeam } from 'context'
 import { Stack, useLocalSearchParams } from 'expo-router'
 import {
@@ -10,8 +9,8 @@ import {
   playerPerformanceStatsFragment,
   transferFragment
 } from 'fragments'
-import { matchPositions } from 'globals'
 import { ScrollView } from 'react-native'
+import { Surface, Text } from 'react-native-paper'
 import { Player } from 'types'
 import { gql, useQuery } from 'urql'
 import { assertDefined, assertType } from 'utils/asserts'
@@ -52,8 +51,6 @@ const FetchPlayer = gql`
 `
 
 export default function PlayerScreen() {
-  console.log('matchPositions: ', matchPositions.join(' '))
-
   const { team } = useTeam()
   assertDefined(team)
 
@@ -66,13 +63,21 @@ export default function PlayerScreen() {
   })
 
   if (data) {
+    const player = data.player
     return (
-      <ScrollView>
-        <Stack.Screen options={{ title: data.player.name }} />
-        <Text>{JSON.stringify(data)}</Text>
-      </ScrollView>
+      <Surface style={{ flex: 1 }}>
+        <Stack.Screen options={{ title: player.name }} />
+
+        <ScrollView>
+          <Text>{JSON.stringify(player)}</Text>
+        </ScrollView>
+      </Surface>
     )
   } else {
-    return <Text>Loading Player...</Text>
+    return (
+      <Surface style={{ flex: 1 }}>
+        <Text>Loading Player...</Text>
+      </Surface>
+    )
   }
 }

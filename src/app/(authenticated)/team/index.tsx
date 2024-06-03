@@ -1,5 +1,9 @@
-import { Text } from '@rneui/themed'
+import { Surface, Text } from 'react-native-paper'
 
 export default function TeamScreen() {
-  return <Text>Dashboard</Text>
+  return (
+    <Surface style={{ flex: 1 }}>
+      <Text>Dashboard</Text>
+    </Surface>
+  )
 }

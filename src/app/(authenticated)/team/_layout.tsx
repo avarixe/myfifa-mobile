@@ -1,11 +1,12 @@
-import { Avatar, Icon } from '@rneui/themed'
+import { CommonActions } from '@react-navigation/native'
 import { teamIdAtom } from 'atoms'
 import { SettingsButton } from 'components'
 import { TeamActionsSpeedDial, TeamDatePicker } from 'components/Team'
 import { TeamProvider, useTeam } from 'context'
 import { Tabs } from 'expo-router'
+import { Avatar, BottomNavigation, Icon } from 'react-native-paper'
 import { useRecoilValue } from 'recoil'
-import { assertDefined } from 'utils/asserts'
+import { assertDefined, assertType } from 'utils/asserts'
 import { getBadgeUrl, getCurrentSeason } from 'utils/team'
 
 const TeamTabs = () => {
@@ -18,15 +19,52 @@ const TeamTabs = () => {
         title: 'MyFIFA Manager',
         headerShown: false,
         headerTitleAlign: 'center',
-        headerRight: SettingsButton
+        headerRight: SettingsButton,
+        headerStyle: { backgroundColor: '#000' },
+        headerTintColor: '#fff'
       }}
+      tabBar={({ navigation, state, descriptors, insets }) => (
+        <BottomNavigation.Bar
+          navigationState={state}
+          safeAreaInsets={insets}
+          onTabPress={({ route, preventDefault }) => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true
+            })
+
+            if (event.defaultPrevented) {
+              preventDefault()
+            } else {
+              navigation.dispatch({
+                ...CommonActions.navigate(route.name, route.params),
+                target: state.key
+              })
+            }
+          }}
+          renderIcon={({ route, focused, color }) => {
+            const { options } = descriptors[route.key]
+            if (options.tabBarIcon) {
+              return options.tabBarIcon({ focused, color, size: 24 })
+            }
+
+            return null
+          }}
+          getLabelText={({ route }) => {
+            const { options } = descriptors[route.key]
+            assertType<string | undefined>(options.tabBarLabel)
+            return options.tabBarLabel ?? options.title ?? route.name
+          }}
+        />
+      )}
     >
       <Tabs.Screen
         name="players"
         options={{
           title: 'Players',
           tabBarIcon: ({ color }) => (
-            <Icon name="run" type="material-community" color={color} />
+            <Icon source="run" size={24} color={color} />
           )
         }}
         listeners={({ navigation }) => ({
@@ -41,7 +79,7 @@ const TeamTabs = () => {
         options={{
           title: 'Season',
           tabBarIcon: ({ color }) => (
-            <Icon name="trophy" type="material-community" color={color} />
+            <Icon source="trophy" size={24} color={color} />
           )
         }}
         listeners={({ navigation }) => ({
@@ -60,20 +98,16 @@ const TeamTabs = () => {
         options={{
           title: team?.name ?? 'Team',
           headerShown: true,
-          tabBarIcon: ({ color }) => (
-            <Avatar
-              source={team?.badgePath ? { uri: getBadgeUrl(team) } : undefined}
-              icon={
-                team?.badgePath
-                  ? undefined
-                  : {
-                      name: 'shield-half-full',
-                      type: 'material-community',
-                      color
-                    }
-              }
-            />
-          )
+          tabBarIcon: ({ color }) =>
+            team?.badgePath ? (
+              <Avatar.Image
+                source={{ uri: getBadgeUrl(team) }}
+                size={24}
+                style={{ backgroundColor: 'transparent' }}
+              />
+            ) : (
+              <Avatar.Icon icon="shield-half-full" color={color} />
+            )
         }}
       />
       <Tabs.Screen
@@ -81,7 +115,7 @@ const TeamTabs = () => {
         options={{
           title: 'Matches',
           tabBarIcon: ({ color }) => (
-            <Icon name="soccer-field" type="material-community" color={color} />
+            <Icon source="soccer-field" size={24} color={color} />
           )
         }}
         listeners={({ navigation }) => ({
@@ -97,11 +131,7 @@ const TeamTabs = () => {
           title: 'Squads',
           headerShown: true,
           tabBarIcon: ({ color }) => (
-            <Icon
-              name="vector-polygon-variant"
-              type="material-community"
-              color={color}
-            />
+            <Icon source="vector-polygon-variant" size={24} color={color} />
           )
         }}
       />

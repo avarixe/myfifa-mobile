@@ -1,10 +1,6 @@
-import { Button } from '@rneui/themed'
 import { router } from 'expo-router'
+import { IconButton } from 'react-native-paper'
 
 export const SettingsButton = () => (
-  <Button
-    onPress={() => router.navigate('/settings')}
-    icon={{ name: 'cog', type: 'material-community' }}
-    color="transparent"
-  />
+  <IconButton onPress={() => router.navigate('/settings')} icon="cog" />
 )

@@ -1,5 +1,5 @@
-import { Button } from '@rneui/themed'
 import { useAuth } from 'hooks'
+import { Button } from 'react-native-paper'
 import { gql, useMutation } from 'urql'
 
 const RevokeAccessToken = gql`
@@ -25,7 +25,13 @@ export function LogOut() {
   }
 
   return (
-    <Button onPress={signOut} loading={fetching} color="error">
+    <Button
+      onPress={signOut}
+      loading={fetching}
+      mode="contained"
+      buttonColor="red"
+      textColor="white"
+    >
       Sign Out
     </Button>
   )

@@ -1,10 +1,10 @@
-import { Button } from '@rneui/themed'
 import { SettingsButton } from 'components'
 import { UserProvider } from 'context'
 import { Redirect, router } from 'expo-router'
 import { Drawer } from 'expo-router/drawer'
 import { StatusBar } from 'expo-status-bar'
 import { useAuth } from 'hooks'
+import { IconButton } from 'react-native-paper'
 
 export default function AppLayout() {
   const { token } = useAuth()
@@ -25,26 +25,17 @@ export default function AppLayout() {
           title: 'MyFIFA Manager',
           headerTitleAlign: 'center',
           headerLeft: () => null,
-          headerRight: SettingsButton
+          headerRight: SettingsButton,
+          headerStyle: { backgroundColor: '#000' },
+          headerTintColor: '#fff',
+          swipeEdgeWidth: 0
         }}
       >
-        <Drawer.Screen
-          name="index"
-          options={{
-            drawerLabel: 'MyFIFA Manager'
-          }}
-        />
-        <Drawer.Screen
-          name="team"
-          options={{
-            headerShown: false,
-            drawerItemStyle: { display: 'none' }
-          }}
-        />
+        <Drawer.Screen name="index" />
+        <Drawer.Screen name="team" options={{ headerShown: false }} />
         <Drawer.Screen
           name="select-team"
           options={{
-            drawerLabel: 'Select a Team',
             title: 'Select a Team',
             headerRight: () => null
           }}
@@ -52,16 +43,9 @@ export default function AppLayout() {
         <Drawer.Screen
           name="settings"
           options={{
-            drawerLabel: 'Settings',
             headerLeft: () => {
               if (router.canGoBack()) {
-                return (
-                  <Button
-                    onPress={router.back}
-                    icon={{ name: 'arrow-left', type: 'material-community' }}
-                    color="transparent"
-                  />
-                )
+                return <IconButton onPress={router.back} icon="arrow-left" />
               } else {
                 return null
               }
@@ -70,7 +54,7 @@ export default function AppLayout() {
           }}
         />
       </Drawer>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
     </UserProvider>
   )
 }

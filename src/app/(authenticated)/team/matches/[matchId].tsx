@@ -1,4 +1,3 @@
-import { Text } from '@rneui/themed'
 import { CapView } from 'components'
 import { Stack, useLocalSearchParams } from 'expo-router'
 import {
@@ -9,6 +8,7 @@ import {
   penaltyShootoutFragment
 } from 'fragments'
 import { ScrollView, View } from 'react-native'
+import { Surface, Text } from 'react-native-paper'
 import { Match } from 'types'
 import { gql, useQuery } from 'urql'
 import { assertType } from 'utils/asserts'
@@ -57,23 +57,29 @@ export default function MatchScreen() {
   if (data) {
     const match = data.match
     return (
-      <ScrollView>
+      <Surface style={{ flex: 1 }}>
         <Stack.Screen options={{ title: toDateString(match.playedOn) }} />
-        <Text>
-          {match.home} v {match.away}
-        </Text>
-        <Text>{match.score}</Text>
+        <ScrollView>
+          <Text>
+            {match.home} v {match.away}
+          </Text>
+          <Text>{match.score}</Text>
 
-        <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-          {match.caps.map(cap => (
-            <CapView key={cap.id} match={match} cap={cap} />
-          ))}
-        </View>
+          <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+            {match.caps.map(cap => (
+              <CapView key={cap.id} match={match} cap={cap} />
+            ))}
+          </View>
 
-        <Text>{JSON.stringify(match)}</Text>
-      </ScrollView>
+          <Text>{JSON.stringify(match)}</Text>
+        </ScrollView>
+      </Surface>
     )
   } else {
-    return <Text>Loading Match...</Text>
+    return (
+      <Surface style={{ flex: 1 }}>
+        <Text>Loading Match...</Text>
+      </Surface>
+    )
   }
 }

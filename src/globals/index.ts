@@ -16,7 +16,7 @@ export enum Position {
   RW = 'RW'
 }
 
-export const positions = Object.keys(Position)
+export const positions = [...new Set(Object.keys(Position))]
 
 export enum MatchPosition {
   LW = 'LW',
@@ -49,7 +49,6 @@ export enum MatchPosition {
 }
 
 export const matchPositions = [...new Set(Object.keys(MatchPosition))]
-console.log('matchPositions: ', matchPositions.join(' '))
 
 export enum SetPiece {
   PK = 'Penalty',

@@ -1,4 +1,3 @@
-import { Text } from '@rneui/themed'
 import { userFragment } from 'fragments'
 import {
   createContext,
@@ -7,6 +6,7 @@ import {
   useEffect,
   useState
 } from 'react'
+import { Surface, Text } from 'react-native-paper'
 import { User } from 'types'
 import { gql, useQuery } from 'urql'
 
@@ -43,7 +43,13 @@ export function UserProvider(props: PropsWithChildren) {
 
   return (
     <UserContext.Provider value={{ user }}>
-      {user ? props.children : <Text>Loading User...</Text>}
+      {user ? (
+        props.children
+      ) : (
+        <Surface style={{ flex: 1 }}>
+          <Text>Loading User...</Text>
+        </Surface>
+      )}
     </UserContext.Provider>
   )
 }

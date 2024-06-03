@@ -1,44 +1,26 @@
-import { ListItem } from '@rneui/themed'
-import { LogOut, TouchableListItem } from 'components'
+import { LogOut } from 'components'
 import { useUser } from 'context'
 import { router } from 'expo-router'
-import { View } from 'react-native'
+import { List, Surface } from 'react-native-paper'
+import { assertDefined } from 'utils/asserts'
 
 export default function SettingsScreen() {
   const { user } = useUser()
+  assertDefined(user)
 
   return (
-    <View style={{ padding: 4 }}>
-      <TouchableListItem
-        bottomDivider
+    <Surface style={{ flex: 1, padding: 8 }}>
+      <List.Item
+        title="Change Team"
         onPress={() => {
           router.navigate('/select-team')
         }}
-      >
-        <ListItem.Content>
-          <ListItem.Title>Change Team</ListItem.Title>
-        </ListItem.Content>
-        <ListItem.Chevron />
-      </TouchableListItem>
-      <ListItem bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>{user?.fullName}</ListItem.Title>
-          <ListItem.Subtitle>Name</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-      <ListItem bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>{user?.username}</ListItem.Title>
-          <ListItem.Subtitle>Username</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-      <ListItem bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>{user?.email}</ListItem.Title>
-          <ListItem.Subtitle>Email Address</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
+        right={() => <List.Icon icon="chevron-right" />}
+      />
+      <List.Item title={user?.fullName} description="Name" />
+      <List.Item title={user?.username} description="Username" />
+      <List.Item title={user?.email} description="Email Address" />
       <LogOut />
-    </View>
+    </Surface>
   )
 }

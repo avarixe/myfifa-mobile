@@ -2,6 +2,7 @@ import { UrqlProvider } from 'context'
 import { Slot } from 'expo-router'
 import { useAuth } from 'hooks'
 import React, { useCallback, useEffect, useState } from 'react'
+import { PaperProvider } from 'react-native-paper'
 import { RecoilRoot } from 'recoil'
 
 const App = () => {
@@ -24,7 +25,9 @@ export default function Layout() {
   return (
     <RecoilRoot>
       <UrqlProvider>
-        <App />
+        <PaperProvider>
+          <App />
+        </PaperProvider>
       </UrqlProvider>
     </RecoilRoot>
   )

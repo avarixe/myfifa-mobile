@@ -1,4 +1,3 @@
-import { Text } from '@rneui/themed'
 import { teamFragment } from 'fragments'
 import {
   createContext,
@@ -7,6 +6,7 @@ import {
   useEffect,
   useState
 } from 'react'
+import { Surface, Text } from 'react-native-paper'
 import { Team } from 'types'
 import { gql, useQuery } from 'urql'
 
@@ -50,7 +50,13 @@ export function TeamProvider(props: TeamProviderProps) {
 
   return (
     <TeamContext.Provider value={{ team }}>
-      {team ? props.children : <Text>Loading Team...</Text>}
+      {team ? (
+        props.children
+      ) : (
+        <Surface style={{ flex: 1 }}>
+          <Text>Loading Team...</Text>
+        </Surface>
+      )}
     </TeamContext.Provider>
   )
 }

@@ -1,6 +1,6 @@
-import { Avatar, Badge, Icon, Text } from '@rneui/themed'
 import React from 'react'
 import { View } from 'react-native'
+import { Avatar, Badge, Icon, Text } from 'react-native-paper'
 import { Cap, Match } from 'types'
 
 export const CapView: React.FC<{
@@ -16,72 +16,54 @@ export const CapView: React.FC<{
 
   return (
     <View style={{ width: 80, alignItems: 'center' }}>
-      <Avatar
-        icon={{
-          name: 'account',
-          type: 'material-community',
-          color: 'black',
-          size: 40
-        }}
-        size="medium"
-        rounded
-        containerStyle={{
-          backgroundColor: '#BDBDBD'
-        }}
-      />
+      <Avatar.Icon icon="account" />
       <Badge
-        value={cap.rating}
-        status="success"
-        containerStyle={{
+        style={{
           position: 'absolute',
           top: 0,
           right: 12
         }}
-      />
+      >
+        {cap.rating}
+      </Badge>
       <Badge
-        value={`G${numGoals}`}
-        status="primary"
-        containerStyle={{
+        style={{
           position: 'absolute',
           top: 34,
           right: 12
         }}
-      />
+      >
+        {numGoals}
+      </Badge>
       <Badge
-        value={`A${numAssists}`}
-        status="primary"
-        containerStyle={{
+        style={{
           position: 'absolute',
           top: 34,
           left: 12
         }}
-      />
-      <Badge
-        value={
-          <Icon
-            name="card"
-            type="material-community"
-            color="orange"
-            size={16}
-            style={{ transform: [{ rotate: '90deg' }] }}
-          />
-        }
-        containerStyle={{
+      >
+        {numAssists}
+      </Badge>
+      <View
+        style={{
+          transform: [{ rotate: '90deg' }],
           backgroundColor: 'transparent',
           position: 'absolute',
           top: 17,
           left: 5
         }}
-      />
+      >
+        <Icon source="card" color="warning" size={16} />
+      </View>
       <Badge
-        value={`${cap.stop}'`}
-        status="error"
-        containerStyle={{
+        style={{
           position: 'absolute',
           top: 0,
           left: 12
         }}
-      />
+      >
+        {`${cap.stop}'`}
+      </Badge>
       <Text>{cap.player.name}</Text>
     </View>
   )

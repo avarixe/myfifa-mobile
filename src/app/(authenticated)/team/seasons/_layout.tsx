@@ -7,7 +7,9 @@ export default function SeasonsLayout() {
       screenOptions={{
         title: 'Seasons',
         headerTitleAlign: 'center',
-        headerRight: SettingsButton
+        headerRight: SettingsButton,
+        headerStyle: { backgroundColor: '#000' },
+        headerTintColor: '#fff'
       }}
     />
   )

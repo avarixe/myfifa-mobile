@@ -1,5 +1,5 @@
-import { Icon } from '@rneui/themed'
 import { useMemo } from 'react'
+import { Icon } from 'react-native-paper'
 import { Player } from 'types'
 
 export const PlayerStatus: React.FC<{ player: Player }> = ({ player }) => {
@@ -33,5 +33,5 @@ export const PlayerStatus: React.FC<{ player: Player }> = ({ player }) => {
     }
   }, [player.status])
 
-  return <Icon name={icon} type="material-community" color={color} />
+  return <Icon source={icon} size={24} color={color} />
 }

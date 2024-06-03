@@ -1,14 +1,13 @@
-import { ListItem } from '@rneui/themed'
 import { FlashList } from '@shopify/flash-list'
-import { TouchableListItem } from 'components'
 import { useTeam } from 'context'
 import { router } from 'expo-router'
 import { matchFragment } from 'fragments'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { View } from 'react-native'
+import { List, Surface } from 'react-native-paper'
 import { Match } from 'types'
 import { gql, useQuery } from 'urql'
 import { assertDefined } from 'utils/asserts'
+import { toDateString } from 'utils/date'
 
 const FetchMatches = gql`
   query FetchMatches(
@@ -76,33 +75,26 @@ export default function MatchesScreen() {
   }, [setPagination])
 
   return (
-    <View style={{ height: '100%' }}>
+    <Surface style={{ flex: 1 }}>
       <FlashList
         data={matches}
         refreshing={fetching}
         renderItem={({ item: match }) => {
           return (
-            <TouchableListItem
-              bottomDivider
+            <List.Item
+              title={`${match.home} v ${match.away}`}
+              description={`${match.score} ${toDateString(match.playedOn)}`}
               onPress={() => {
                 router.navigate(`/team/matches/${match.id}`)
               }}
-            >
-              <ListItem.Content>
-                <ListItem.Title>
-                  {match.home} v {match.away}
-                </ListItem.Title>
-                <ListItem.Subtitle>{match.score}</ListItem.Subtitle>
-                <ListItem.Subtitle>{match.playedOn}</ListItem.Subtitle>
-              </ListItem.Content>
-              <ListItem.Chevron />
-            </TouchableListItem>
+              right={() => <List.Icon icon="chevron-right" />}
+            />
           )
         }}
         estimatedItemSize={100}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.3}
       />
-    </View>
+    </Surface>
   )
 }

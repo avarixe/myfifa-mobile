@@ -1,7 +1,7 @@
-import { Text } from '@rneui/themed'
 import { useTeam } from 'context'
 import { playerFragment, squadFragment } from 'fragments'
 import { ScrollView } from 'react-native'
+import { Surface, Text } from 'react-native-paper'
 import { Squad } from 'types'
 import { gql, useQuery } from 'urql'
 import { assertDefined } from 'utils/asserts'
@@ -31,8 +31,10 @@ export default function SquadsScreen() {
   })
 
   return (
-    <ScrollView>
-      <Text>{JSON.stringify(data)}</Text>
-    </ScrollView>
+    <Surface style={{ flex: 1 }}>
+      <ScrollView>
+        <Text>{JSON.stringify(data)}</Text>
+      </ScrollView>
+    </Surface>
   )
 }
