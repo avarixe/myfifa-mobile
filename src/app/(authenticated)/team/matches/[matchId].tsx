@@ -1,4 +1,5 @@
 import { Text } from '@rneui/themed'
+import { CapView } from 'components'
 import { Stack, useLocalSearchParams } from 'expo-router'
 import {
   bookingFragment,
@@ -7,10 +8,11 @@ import {
   matchFragment,
   penaltyShootoutFragment
 } from 'fragments'
-import { ScrollView } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { Match } from 'types'
 import { gql, useQuery } from 'urql'
 import { assertType } from 'utils/asserts'
+import { toDateString } from 'utils/date'
 
 const FetchMatch = gql`
   query fetchMatchPage($matchId: ID!) {
@@ -53,12 +55,22 @@ export default function MatchScreen() {
   })
 
   if (data) {
+    const match = data.match
     return (
       <ScrollView>
-        <Stack.Screen
-          options={{ title: `${data.match.home} v ${data.match.away}` }}
-        />
-        <Text>{JSON.stringify(data)}</Text>
+        <Stack.Screen options={{ title: toDateString(match.playedOn) }} />
+        <Text>
+          {match.home} v {match.away}
+        </Text>
+        <Text>{match.score}</Text>
+
+        <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+          {match.caps.map(cap => (
+            <CapView key={cap.id} match={match} cap={cap} />
+          ))}
+        </View>
+
+        <Text>{JSON.stringify(match)}</Text>
       </ScrollView>
     )
   } else {

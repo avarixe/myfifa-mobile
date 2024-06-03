@@ -20,9 +20,6 @@ const FetchPlayer = gql`
   query fetchPlayerPage($teamId: ID!, $playerId: ID!) {
     player(id: $playerId) {
       ...PlayerData
-      coverage {
-        ${matchPositions.join(' ')}
-      }
       contracts {
         ...ContractData
       }
@@ -55,6 +52,8 @@ const FetchPlayer = gql`
 `
 
 export default function PlayerScreen() {
+  console.log('matchPositions: ', matchPositions.join(' '))
+
   const { team } = useTeam()
   assertDefined(team)
 

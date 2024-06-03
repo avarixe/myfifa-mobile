@@ -1,68 +1,71 @@
-export enum positions {
-  'GK',
-  'LB',
-  'LWB',
-  'CB',
-  'RB',
-  'RWB',
-  'LM',
-  'CDM',
-  'CM',
-  'CAM',
-  'RM',
-  'LW',
-  'CF',
-  'ST',
-  'RW'
+export enum Position {
+  GK = 'GK',
+  LB = 'LB',
+  LWB = 'LWB',
+  CB = 'CB',
+  RB = 'RB',
+  RWB = 'RWB',
+  LM = 'LM',
+  CDM = 'CDM',
+  CM = 'CM',
+  CAM = 'CAM',
+  RM = 'RM',
+  LW = 'LW',
+  CF = 'CF',
+  ST = 'ST',
+  RW = 'RW'
 }
 
-export const matchPositionTypes: Record<string, 'FWD' | 'MID' | 'DEF'> = {
-  LW: 'FWD',
-  LS: 'FWD',
-  ST: 'FWD',
-  RS: 'FWD',
-  LF: 'FWD',
-  CF: 'FWD',
-  RF: 'FWD',
-  RW: 'FWD',
-  LAM: 'MID',
-  CAM: 'MID',
-  RAM: 'MID',
-  LM: 'MID',
-  LDM: 'MID',
-  LCM: 'MID',
-  CDM: 'MID',
-  CM: 'MID',
-  RDM: 'MID',
-  RCM: 'MID',
-  RM: 'MID',
-  LB: 'DEF',
-  LWB: 'DEF',
-  LCB: 'DEF',
-  CB: 'DEF',
-  RCB: 'DEF',
-  RB: 'DEF',
-  RWB: 'DEF',
-  GK: 'DEF'
+export const positions = Object.keys(Position)
+
+export enum MatchPosition {
+  LW = 'LW',
+  LS = 'LS',
+  ST = 'ST',
+  RS = 'RS',
+  LF = 'LF',
+  CF = 'CF',
+  RF = 'RF',
+  RW = 'RW',
+  LAM = 'LAM',
+  CAM = 'CAM',
+  RAM = 'RAM',
+  LM = 'LM',
+  LDM = 'LDM',
+  LCM = 'LCM',
+  CDM = 'CDM',
+  CM = 'CM',
+  RDM = 'RDM',
+  RCM = 'RCM',
+  RM = 'RM',
+  LB = 'LB',
+  LWB = 'LWB',
+  LCB = 'LCB',
+  CB = 'CB',
+  RCB = 'RCB',
+  RB = 'RB',
+  RWB = 'RWB',
+  GK = 'GK'
 }
 
-export const matchPositions = Object.keys(matchPositionTypes)
+export const matchPositions = [...new Set(Object.keys(MatchPosition))]
+console.log('matchPositions: ', matchPositions.join(' '))
 
-export enum setPieces {
-  PK = 'Penalty Kick',
-  CK = 'Corner Kick',
+export enum SetPiece {
+  PK = 'Penalty',
+  CK = 'Corner',
   DFK = 'Direct Free Kick',
   IFK = 'Indirect Free Kick'
 }
 
-export enum bonusRequirementTypes {
+export enum BonusRequirementType {
   'Appearances',
   'Goals',
   'Assists',
   'Clean Sheets'
 }
 
-export enum nationalities {
+export enum Nationality {
   // Africa
   Algeria = 'dz',
   Angola = 'ao',
