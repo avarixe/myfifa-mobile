@@ -46,6 +46,8 @@ export default function MatchesScreen() {
     result: ['win', 'draw', 'loss']
   })
 
+  const [matches, setMatches] = useState<Match[]>([])
+
   const [{ data, fetching }] = useQuery<{
     team: { matchSet: { matches: Match[]; total: number } }
   }>({
@@ -57,15 +59,15 @@ export default function MatchesScreen() {
     }
   })
 
-  const [matches, setMatches] = useState<Match[]>(
-    data?.team?.matchSet?.matches || []
-  )
-
   useEffect(() => {
-    if (data?.team?.matchSet?.matches) {
+    if (data) {
       setMatches(prevMatches => [...prevMatches, ...data.team.matchSet.matches])
     }
   }, [data])
+
+  useEffect(() => {
+    setMatches([])
+  }, [team])
 
   const onEndReached = useCallback(() => {
     setPagination(prevPagination => ({
@@ -76,25 +78,27 @@ export default function MatchesScreen() {
 
   return (
     <Surface style={{ flex: 1 }}>
-      <FlashList
-        data={matches}
-        refreshing={fetching}
-        renderItem={({ item: match }) => {
-          return (
-            <List.Item
-              title={`${match.home} v ${match.away}`}
-              description={`${match.score} ${toDateString(match.playedOn)}`}
-              onPress={() => {
-                router.navigate(`/team/matches/${match.id}`)
-              }}
-              right={() => <List.Icon icon="chevron-right" />}
-            />
-          )
-        }}
-        estimatedItemSize={100}
-        onEndReached={onEndReached}
-        onEndReachedThreshold={0.3}
-      />
+      {matches.length > 0 && (
+        <FlashList
+          data={matches}
+          refreshing={fetching}
+          renderItem={({ item: match }) => {
+            return (
+              <List.Item
+                title={`${match.home} v ${match.away}`}
+                description={`${match.score} ${toDateString(match.playedOn)}`}
+                onPress={() => {
+                  router.navigate(`/team/matches/${match.id}`)
+                }}
+                right={() => <List.Icon icon="chevron-right" />}
+              />
+            )
+          }}
+          estimatedItemSize={100}
+          onEndReached={onEndReached}
+          onEndReachedThreshold={0.1}
+        />
+      )}
     </Surface>
   )
 }
