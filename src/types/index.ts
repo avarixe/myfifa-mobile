@@ -102,3 +102,8 @@ export interface Booking extends MatchModel {
 }
 
 export interface Squad extends TeamModel, NamedModel {}
+
+export interface Competition extends TeamModel, NamedModel {
+  season: number
+  champion?: string
+}

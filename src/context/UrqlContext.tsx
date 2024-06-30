@@ -4,6 +4,7 @@ import { cacheExchange, Client, fetchExchange, Provider } from 'urql'
 
 export const UrqlProvider = (props: PropsWithChildren) => {
   const { token } = useAuth()
+  console.debug('UrqlProvider token: ', token)
   const client = useMemo(
     () =>
       new Client({
